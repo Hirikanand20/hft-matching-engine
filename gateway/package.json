@@ -1,0 +1,13 @@
+{
+  "name": "gateway",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node gateway.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0",
+    "ioredis": "^5.4.2"
+  }
+}

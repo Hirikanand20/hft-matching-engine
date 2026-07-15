@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+
+# C++ Build outputs
+build/
+bin/
+*.obj
+*.o
+*.exe
+*.dll
+*.pdb
+*.ilk
+
+# IDE and System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

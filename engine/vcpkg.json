@@ -1,0 +1,11 @@
+{
+  "name": "hft-engine",
+  "version-string": "1.0.0",
+  "dependencies": [
+    "curl",
+    "hiredis",
+    "nlohmann-json",
+    "sqlite3",
+    "concurrentqueue"
+  ]
+}
