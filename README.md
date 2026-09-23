@@ -97,7 +97,7 @@ We added a full Playwright E2E suite that validates the entire pipeline with **r
 
 ### Test Coverage (7 tests)
 
-<img width="1917" height="417" alt="playwright" src="https://github.com/user-attachments/assets/c1d6a9d2-a044-430f-8b67-dafaaa63e939" />
+<img width="1917" height="417" alt="Image" src="https://github.com/user-attachments/assets/be8d37e7-620c-4324-9b5d-0eacdacbab66" />
 
 **`tests/gateway.spec.ts` - Gateway + Docker Redis (4 tests):**
 - `book:* 56B broadcast` - Verifies C++ engine's 56-byte binary OrderEvent is correctly published via Redis and broadcast to WebSocket subscribers
