@@ -90,3 +90,29 @@ The Gateway Output will show:
 WS gateway on :3001
 [Redis] Subscribed to book and snapshot channels...
 [WebSocket] Client connected: subscribed to RELIANCE.NS
+
+## Testing - End-to-End Verification
+
+We added a full Playwright E2E suite that validates the entire pipeline with **real Docker Redis** - no mocks. It tests the exact path: `Frontend WS -> Gateway :3001 -> Redis -> Gateway -> Frontend`.
+
+### Test Coverage (7 tests)
+
+<img width="1917" height="417" alt="playwright" src="https://github.com/user-attachments/assets/d6fa510f-494a-4af7-8232-950fbcb478ba" />
+
+
+**`tests/gateway.spec.ts` - Gateway + Docker Redis (4 tests):**
+- `book:* 56B broadcast` - Verifies C++ engine's 56-byte binary OrderEvent is correctly published via Redis and broadcast to WebSocket subscribers
+- `snapshot:* broadcast` - Verifies dynamic snapshot payloads (>56B) are streamed to newly connected clients
+- `add_order pushes to cmd: list` - Verifies Buy/Sell from UI pushes JSON command to `cmd:SYMBOL` Redis list for C++ engine to consume
+- `unsub stops receiving` - Verifies flow-control and subscription cleanup
+
+**`tests/frontend.spec.ts` - Frontend + Gateway Integration (3 tests):**
+- `renders HFT Screener and order book from gateway` - Loads React app and verifies live order book decoding via DataView
+- `symbol switch changes book title` - Verifies multi-symbol subscription (RELIANCE.NS, TCS.NS, VBL.NS)
+- `Buy/Sell sends add_order to gateway` - Verifies zero-copy UI triggers correct WS message
+
+### Run Tests
+
+Redis must be running on Docker:
+```bash
+docker run -d --name hft-redis -p 6379:6379 redis:latest
