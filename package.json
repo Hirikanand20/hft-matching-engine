@@ -3,11 +3,17 @@
   "private": true,
   "scripts": {
     "engine": "cd engine/build/Release && engine.exe",
-    "gateway": "cd gateway && npm run dev", 
+    "gateway": "cd gateway && npm run dev",
     "frontend": "cd frontend && npm run dev",
-    "dev": "concurrently -k -n ENGINE,GATEWAY,FRONTEND -c yellow,green,magenta \"npm run engine\" \"npm run gateway\" \"npm run frontend\""
+    "dev": "concurrently -k -n ENGINE,GATEWAY,FRONTEND -c yellow,green,magenta \"npm run engine\" \"npm run gateway\" \"npm run frontend\"",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
   },
   "devDependencies": {
-    "concurrently": "^9.0.1"
+    "@playwright/test": "^1.63.0",
+    "concurrently": "^9.0.1",
+    "ioredis-mock": "^8.13.1",
+    "ws": "^8.21.3"
   }
 }
